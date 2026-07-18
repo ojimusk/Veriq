@@ -1,20 +1,15 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Veriq",
-  description:
-    "Trust Infrastructure for AI. Verify identities, govern AI agents, and generate cryptographic proof.",
-  applicationName: "Veriq",
-  keywords: [
-    "AI",
-    "Verification",
-    "Identity",
-    "Proof",
-    "Security",
-    "Trust",
-    "Web3",
-  ],
+  description: "The Trust Infrastructure for the AI Era",
 };
 
 export default function RootLayout({
@@ -24,15 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        style={{
-          margin: 0,
-          background: "#050505",
-          color: "#ffffff",
-          fontFamily:
-            "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
-        }}
-      >
+      <body className={inter.className}>
         {children}
       </body>
     </html>
