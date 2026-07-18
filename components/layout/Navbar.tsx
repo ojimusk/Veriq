@@ -2,118 +2,74 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <>
-      <header
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 999,
-          backdropFilter: "blur(16px)",
-          background: "rgba(5,5,5,.75)",
-          borderBottom: "1px solid #1f1f1f",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: 1200,
-            margin: "0 auto",
-            padding: "20px",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <Link
-            href="/"
-            style={{
-              color: "white",
-              fontWeight: 800,
-              fontSize: 42,
-              textDecoration: "none",
-            }}
-          >
-            Veriq
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-[#0B0B0B]/80 backdrop-blur">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
+        {/* Logo */}
+        <Link href="/" className="text-3xl font-bold text-white">
+          Veriq
+        </Link>
+
+        {/* Desktop Menu */}
+        <nav className="hidden items-center gap-8 md:flex">
+          <Link href="/" className="text-white hover:text-gray-300">
+            Home
           </Link>
 
-          <button
-            onClick={() => setOpen(!open)}
-            style={{
-              width: 58,
-              height: 58,
-              borderRadius: 16,
-              border: "1px solid #2d2d2d",
-              background: "#171717",
-              color: "white",
-              cursor: "pointer",
-            }}
-          >
-            {open ? <X size={30} /> : <Menu size={30} />}
-          </button>
-        </div>
-      </header>
+          <Link href="/features" className="text-white hover:text-gray-300">
+            Features
+          </Link>
 
-      {open && (
-        <div
-          style={{
-            position: "fixed",
-            top: 100,
-            left: 20,
-            right: 20,
-            background: "#111",
-            borderRadius: 24,
-            padding: 30,
-            border: "1px solid #222",
-            zIndex: 998,
-          }}
+          <Link href="/docs" className="text-white hover:text-gray-300">
+            Documentation
+          </Link>
+        </nav>
+
+        {/* Mobile Button */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="text-white md:hidden"
         >
-          {[
-            ["Home", "/"],
-            ["Features", "/features"],
-            ["Documentation", "/docs"],
-            ["Pricing", "/pricing"],
-            ["Contact", "/contact"],
-          ].map(([title, href]) => (
-            <Link
-              key={title}
-              href={href}
-              onClick={() => setOpen(false)}
-              style={{
-                display: "block",
-                color: "white",
-                textDecoration: "none",
-                padding: "18px 0",
-                borderBottom: "1px solid #222",
-                fontSize: 28,
-              }}
-            >
-              {title}
-            </Link>
-          ))}
+          <span className="text-3xl">
+            {open ? "✕" : "☰"}
+          </span>
+        </button>
+      </div>
 
-          <button
-            style={{
-              width: "100%",
-              marginTop: 30,
-              padding: "18px",
-              borderRadius: 16,
-              border: "none",
-              fontWeight: 700,
-              fontSize: 20,
-              cursor: "pointer",
-            }}
-          >
-            Get Started
-          </button>
+      {/* Mobile Menu */}
+      {open && (
+        <div className="border-t border-white/10 bg-[#0B0B0B] md:hidden">
+          <nav className="flex flex-col p-6">
+            <Link
+              href="/"
+              onClick={() => setOpen(false)}
+              className="py-3 text-white"
+            >
+              Home
+            </Link>
+
+            <Link
+              href="/features"
+              onClick={() => setOpen(false)}
+              className="py-3 text-white"
+            >
+              Features
+            </Link>
+
+            <Link
+              href="/docs"
+              onClick={() => setOpen(false)}
+              className="py-3 text-white"
+            >
+              Documentation
+            </Link>
+          </nav>
         </div>
       )}
-    </>
+    </header>
   );
-      }
+}
