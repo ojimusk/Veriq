@@ -7,69 +7,115 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-[#0B0B0B]/80 backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        {/* Logo */}
-        <Link href="/" className="text-3xl font-bold text-white">
-          Veriq
-        </Link>
-
-        {/* Desktop Menu */}
-        <nav className="hidden items-center gap-8 md:flex">
-          <Link href="/" className="text-white hover:text-gray-300">
-            Home
-          </Link>
-
-          <Link href="/features" className="text-white hover:text-gray-300">
-            Features
-          </Link>
-
-          <Link href="/docs" className="text-white hover:text-gray-300">
-            Documentation
-          </Link>
-        </nav>
-
-        {/* Mobile Button */}
-        <button
-          onClick={() => setOpen(!open)}
-          className="text-white md:hidden"
+    <>
+      <header
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 1000,
+          padding: "28px 32px",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
         >
-          <span className="text-3xl">
+          <Link
+            href="/"
+            style={{
+              color: "#fff",
+              textDecoration: "none",
+              fontSize: "28px",
+              fontWeight: 800,
+            }}
+          >
+            Veriq
+          </Link>
+
+          <button
+            onClick={() => setOpen(!open)}
+            style={{
+              width: 64,
+              height: 64,
+              borderRadius: 20,
+              border: "1px solid rgba(255,255,255,.1)",
+              background: "rgba(255,255,255,.05)",
+              color: "#fff",
+              fontSize: 34,
+              cursor: "pointer",
+            }}
+          >
             {open ? "✕" : "☰"}
-          </span>
-        </button>
-      </div>
+          </button>
+        </div>
+      </header>
 
-      {/* Mobile Menu */}
       {open && (
-        <div className="border-t border-white/10 bg-[#0B0B0B] md:hidden">
-          <nav className="flex flex-col p-6">
-            <Link
-              href="/"
-              onClick={() => setOpen(false)}
-              className="py-3 text-white"
+        <div
+          style={{
+            position: "fixed",
+            top: 110,
+            left: 30,
+            right: 30,
+            background: "#121212",
+            border: "1px solid rgba(255,255,255,.08)",
+            borderRadius: 30,
+            padding: 36,
+            zIndex: 999,
+            boxShadow: "0 20px 60px rgba(0,0,0,.45)",
+          }}
+        >
+          {[
+            "Home",
+            "Features",
+            "Documentation",
+            "Pricing",
+            "Contact",
+          ].map((item) => (
+            <div
+              key={item}
+              style={{
+                padding: "22px 0",
+                borderBottom: "1px solid rgba(255,255,255,.08)",
+                fontSize: 20,
+              }}
             >
-              Home
-            </Link>
+              <Link
+                href="/"
+                onClick={() => setOpen(false)}
+                style={{
+                  color: "#fff",
+                  textDecoration: "none",
+                }}
+              >
+                {item}
+              </Link>
+            </div>
+          ))}
 
-            <Link
-              href="/features"
-              onClick={() => setOpen(false)}
-              className="py-3 text-white"
-            >
-              Features
-            </Link>
-
-            <Link
-              href="/docs"
-              onClick={() => setOpen(false)}
-              className="py-3 text-white"
-            >
-              Documentation
-            </Link>
-          </nav>
+          <button
+            style={{
+              width: "100%",
+              marginTop: 28,
+              height: 64,
+              borderRadius: 18,
+              border: "none",
+              background: "#fff",
+              color: "#000",
+              fontWeight: 700,
+              fontSize: 20,
+              cursor: "pointer",
+            }}
+          >
+            Get Started
+          </button>
         </div>
       )}
-    </header>
+    </>
   );
-}
+            }
