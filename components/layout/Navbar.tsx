@@ -4,118 +4,123 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] =useState(false);
 
   return (
-    <>
-      <header
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 1000,
-          padding: "28px 32px",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
+    <header className="fixed top-0 left-0 z-50 w-full border-b border-white/10 bg-[#0B0B0B]/80 backdrop-blur-xl">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
+
+        {/* Logo */}
+        <Link
+          href="/"
+          className="text-4xl font-extrabold tracking-tight text-white"
         >
-          <Link
-            href="/"
-            style={{
-              color: "#fff",
-              textDecoration: "none",
-              fontSize: "28px",
-              fontWeight: 800,
-            }}
-          >
-            Veriq
+          Veriq
+        </Link>
+
+        {/* Desktop Menu */}
+        <nav className="hidden items-center gap-10 md:flex">
+          <Link href="/" className="text-white/70 transition hover:text-white">
+            Home
           </Link>
 
-          <button
-            onClick={() => setOpen(!open)}
-            style={{
-              width: 64,
-              height: 64,
-              borderRadius: 20,
-              border: "1px solid rgba(255,255,255,.1)",
-              background: "rgba(255,255,255,.05)",
-              color: "#fff",
-              fontSize: 34,
-              cursor: "pointer",
-            }}
+          <Link
+            href="#"
+            className="text-white/70 transition hover:text-white"
           >
-            {open ? "✕" : "☰"}
-          </button>
-        </div>
-      </header>
+            Features
+          </Link>
 
-      {open && (
-        <div
-          style={{
-            position: "fixed",
-            top: 110,
-            left: 30,
-            right: 30,
-            background: "#121212",
-            border: "1px solid rgba(255,255,255,.08)",
-            borderRadius: 30,
-            padding: 36,
-            zIndex: 999,
-            boxShadow: "0 20px 60px rgba(0,0,0,.45)",
-          }}
-        >
-          {[
-            "Home",
-            "Features",
-            "Documentation",
-            "Pricing",
-            "Contact",
-          ].map((item) => (
-            <div
-              key={item}
-              style={{
-                padding: "22px 0",
-                borderBottom: "1px solid rgba(255,255,255,.08)",
-                fontSize: 20,
-              }}
-            >
-              <Link
-                href="/"
-                onClick={() => setOpen(false)}
-                style={{
-                  color: "#fff",
-                  textDecoration: "none",
-                }}
-              >
-                {item}
-              </Link>
-            </div>
-          ))}
-
-          <button
-            style={{
-              width: "100%",
-              marginTop: 28,
-              height: 64,
-              borderRadius: 18,
-              border: "none",
-              background: "#fff",
-              color: "#000",
-              fontWeight: 700,
-              fontSize: 20,
-              cursor: "pointer",
-            }}
+          <Link
+            href="#"
+            className="text-white/70 transition hover:text-white"
           >
+            Documentation
+          </Link>
+
+          <Link
+            href="#"
+            className="text-white/70 transition hover:text-white"
+          >
+            Pricing
+          </Link>
+
+          <Link
+            href="#"
+            className="text-white/70 transition hover:text-white"
+          >
+            Contact
+          </Link>
+        </nav>
+
+        {/* Desktop Button */}
+        <div className="hidden md:block">
+          <button className="rounded-xl bg-white px-6 py-3 font-semibold text-black transition hover:scale-105">
             Get Started
           </button>
         </div>
-      )}
-    </>
+
+        {/* Mobile Button */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 md:hidden"
+        >
+          {open ? (
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke="white"
+              strokeWidth="2"
+              fill="none"
+            >
+              <path d="M6 6L18 18" />
+              <path d="M18 6L6 18" />
+            </svg>
+          ) : (
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke="white"
+              strokeWidth="2"
+              fill="none"
+            >
+              <path d="M3 6H21" />
+              <path d="M3 12H21" />
+              <path d="M3 18H21" />
+            </svg>
+          )}
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      <div
+        className={`overflow-hidden transition-all duration-300 ${
+          open ? "max-h-[500px]" : "max-h-0"
+        } md:hidden`}
+      >
+        <div className="border-t border-white/10 bg-[#111111] px-6 py-6">
+
+          <div className="flex flex-col gap-6 text-lg">
+
+            <Link href="/">Home</Link>
+
+            <Link href="#">Features</Link>
+
+            <Link href="#">Documentation</Link>
+
+            <Link href="#">Pricing</Link>
+
+            <Link href="#">Contact</Link>
+
+            <button className="mt-4 rounded-xl bg-white py-4 font-semibold text-black">
+              Get Started
+            </button>
+
+          </div>
+        </div>
+      </div>
+    </header>
   );
-            }
+}
