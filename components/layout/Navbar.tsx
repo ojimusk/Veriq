@@ -1,82 +1,119 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
-  const pathname = usePathname();
-
-  const menus = [
-    { name: "Home", href: "/" },
-    { name: "Features", href: "/features" },
-    { name: "Documentation", href: "/docs" },
-    { name: "Pricing", href: "/pricing" },
-    { name: "Contact", href: "/contact" },
-  ];
+  const [open, setOpen] = useState(false);
 
   return (
-    <header
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 100,
-        background: "rgba(5,5,5,0.85)",
-        backdropFilter: "blur(18px)",
-        borderBottom: "1px solid #1f1f1f",
-      }}
-    >
-      <div
+    <>
+      <header
         style={{
-          maxWidth: 1200,
-          margin: "0 auto",
-          padding: "18px 24px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 999,
+          backdropFilter: "blur(16px)",
+          background: "rgba(5,5,5,.75)",
+          borderBottom: "1px solid #1f1f1f",
         }}
       >
-        <Link
-          href="/"
+        <div
           style={{
-            color: "white",
-            textDecoration: "none",
-            fontSize: 38,
-            fontWeight: 800,
-          }}
-        >
-          Veriq
-        </Link>
-
-        <nav
-          style={{
+            maxWidth: 1200,
+            margin: "0 auto",
+            padding: "20px",
             display: "flex",
-            gap: 18,
+            justifyContent: "space-between",
             alignItems: "center",
           }}
         >
-          {menus.map((menu) => (
+          <Link
+            href="/"
+            style={{
+              color: "white",
+              fontWeight: 800,
+              fontSize: 42,
+              textDecoration: "none",
+            }}
+          >
+            Veriq
+          </Link>
+
+          <button
+            onClick={() => setOpen(!open)}
+            style={{
+              width: 58,
+              height: 58,
+              borderRadius: 16,
+              border: "1px solid #2d2d2d",
+              background: "#171717",
+              color: "white",
+              cursor: "pointer",
+            }}
+          >
+            {open ? <X size={30} /> : <Menu size={30} />}
+          </button>
+        </div>
+      </header>
+
+      {open && (
+        <div
+          style={{
+            position: "fixed",
+            top: 100,
+            left: 20,
+            right: 20,
+            background: "#111",
+            borderRadius: 24,
+            padding: 30,
+            border: "1px solid #222",
+            zIndex: 998,
+          }}
+        >
+          {[
+            ["Home", "/"],
+            ["Features", "/features"],
+            ["Documentation", "/docs"],
+            ["Pricing", "/pricing"],
+            ["Contact", "/contact"],
+          ].map(([title, href]) => (
             <Link
-              key={menu.href}
-              href={menu.href}
+              key={title}
+              href={href}
+              onClick={() => setOpen(false)}
               style={{
+                display: "block",
+                color: "white",
                 textDecoration: "none",
-                color: pathname === menu.href ? "#000" : "#fff",
-                background:
-                  pathname === menu.href ? "#fff" : "transparent",
-                padding: "10px 18px",
-                borderRadius: 12,
-                border: "1px solid #2a2a2a",
-                transition: "0.2s",
-                fontWeight: 600,
+                padding: "18px 0",
+                borderBottom: "1px solid #222",
+                fontSize: 28,
               }}
             >
-              {menu.name}
+              {title}
             </Link>
           ))}
-        </nav>
-      </div>
-    </header>
+
+          <button
+            style={{
+              width: "100%",
+              marginTop: 30,
+              padding: "18px",
+              borderRadius: 16,
+              border: "none",
+              fontWeight: 700,
+              fontSize: 20,
+              cursor: "pointer",
+            }}
+          >
+            Get Started
+          </button>
+        </div>
+      )}
+    </>
   );
-}
+      }
