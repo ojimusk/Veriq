@@ -1,95 +1,33 @@
 export default function Hero() {
   return (
-    <section
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        textAlign: "center",
-        padding: "24px",
-        background:
-          "radial-gradient(circle at top,#16213a 0%,#0d1020 40%,#050505 100%)",
-      }}
-    >
-      <div style={{ maxWidth: "900px" }}>
-        <div
-          style={{
-            display: "inline-block",
-            padding: "10px 22px",
-            borderRadius: "999px",
-            border: "1px solid rgba(255,255,255,.15)",
-            background: "rgba(255,255,255,.05)",
-            marginBottom: "30px",
-            fontSize: "18px",
-          }}
-        >
+    <section className="relative overflow-hidden bg-gradient-to-b from-[#121a34] via-[#0d1020] to-[#060606]">
+      <div className="mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center px-6 pt-32 pb-20 text-center">
+
+        <div className="mb-8 rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm text-gray-300 backdrop-blur">
           🚀 Building Trust Infrastructure for AI
         </div>
 
-        <h1
-          style={{
-            fontSize: "72px",
-            fontWeight: 800,
-            lineHeight: 1.05,
-            margin: 0,
-          }}
-        >
+        <h1 className="max-w-5xl text-6xl font-extrabold leading-[0.95] tracking-[-0.05em] text-white md:text-8xl">
           Trust Every
           <br />
           AI Action.
         </h1>
 
-        <p
-          style={{
-            marginTop: "32px",
-            fontSize: "24px",
-            color: "#A1A1AA",
-            lineHeight: 1.8,
-          }}
-        >
+        <p className="mt-8 max-w-3xl text-lg leading-9 text-gray-400 md:text-2xl">
           Verify identities, govern AI agents, and generate
           cryptographic proof for every important digital action.
         </p>
 
-        <div
-          style={{
-            marginTop: "50px",
-            display: "flex",
-            justifyContent: "center",
-            gap: "20px",
-            flexWrap: "wrap",
-          }}
-        >
-          <button
-            style={{
-              padding: "18px 42px",
-              borderRadius: "16px",
-              border: "none",
-              background: "white",
-              color: "black",
-              fontSize: "20px",
-              fontWeight: 700,
-              cursor: "pointer",
-            }}
-          >
+        <div className="mt-12 flex flex-col gap-5 sm:flex-row">
+          <button className="rounded-2xl bg-white px-10 py-5 text-lg font-semibold text-black transition hover:scale-105">
             Get Started
           </button>
 
-          <button
-            style={{
-              padding: "18px 42px",
-              borderRadius: "16px",
-              border: "1px solid rgba(255,255,255,.2)",
-              background: "transparent",
-              color: "white",
-              fontSize: "20px",
-              cursor: "pointer",
-            }}
-          >
+          <button className="rounded-2xl border border-white/15 px-10 py-5 text-lg text-white transition hover:bg-white/5">
             View Documentation
           </button>
         </div>
+
       </div>
     </section>
   );
