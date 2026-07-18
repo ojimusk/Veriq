@@ -6,123 +6,98 @@ import { useState } from "react";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
+  const menus = [
+    "Home",
+    "Features",
+    "Documentation",
+    "Pricing",
+    "Contact",
+  ];
+
   return (
     <>
-      <header className="fixed top-5 left-0 right-0 z-50">
-        <div className="mx-auto flex max-w-7xl items-center justify-between rounded-2xl border border-white/10 bg-black/50 px-6 py-4 backdrop-blur-2xl shadow-2xl md:px-8">
+      <header className="fixed top-0 left-0 z-50 w-full">
+        <div className="mx-auto max-w-7xl px-5 pt-5">
+          <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-[#0d1120]/80 px-6 py-4 backdrop-blur-xl">
 
-          {/* Logo */}
-          <Link
-            href="/"
-            className="text-3xl font-extrabold tracking-tight text-white"
-          >
-            Veriq
-          </Link>
-
-          {/* Desktop Menu */}
-          <nav className="hidden items-center gap-10 text-sm md:flex">
-            <Link href="/" className="text-white/70 hover:text-white transition">
-              Home
+            <Link
+              href="/"
+              className="text-3xl font-extrabold tracking-tight text-white"
+            >
+              Veriq
             </Link>
 
-            <Link href="#" className="text-white/70 hover:text-white transition">
-              Features
-            </Link>
+            <nav className="hidden items-center gap-10 text-gray-300 lg:flex">
+              {menus.map((item) => (
+                <Link
+                  key={item}
+                  href="#"
+                  className="transition hover:text-white"
+                >
+                  {item}
+                </Link>
+              ))}
+            </nav>
 
-            <Link href="#" className="text-white/70 hover:text-white transition">
-              Documentation
-            </Link>
+            <div className="hidden lg:block">
+              <button className="rounded-xl bg-white px-6 py-3 font-semibold text-black transition hover:scale-105">
+                Get Started
+              </button>
+            </div>
 
-            <Link href="#" className="text-white/70 hover:text-white transition">
-              Pricing
-            </Link>
-
-            <Link href="#" className="text-white/70 hover:text-white transition">
-              Contact
-            </Link>
-          </nav>
-
-          {/* Desktop Button */}
-          <div className="hidden md:block">
-            <button className="rounded-xl bg-white px-6 py-3 font-semibold text-black transition duration-300 hover:scale-105">
-              Get Started
+            <button
+              onClick={() => setOpen(!open)}
+              className="flex h-12 w-12 flex-col items-center justify-center gap-1 rounded-xl border border-white/10 lg:hidden"
+            >
+              <span
+                className={`block h-0.5 w-6 bg-white transition ${
+                  open ? "translate-y-2 rotate-45" : ""
+                }`}
+              />
+              <span
+                className={`block h-0.5 w-6 bg-white transition ${
+                  open ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`block h-0.5 w-6 bg-white transition ${
+                  open ? "-translate-y-2 -rotate-45" : ""
+                }`}
+              />
             </button>
+
           </div>
 
-          {/* Mobile Button */}
-          <button
-            onClick={() => setOpen(!open)}
-            className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 transition md:hidden"
+          <div
+            className={`overflow-hidden transition-all duration-300 ${
+              open ? "mt-4 max-h-[500px]" : "max-h-0"
+            }`}
           >
-            {!open ? (
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                stroke="white"
-                strokeWidth="2"
-                fill="none"
-              >
-                <path d="M3 6H21" />
-                <path d="M3 12H21" />
-                <path d="M3 18H21" />
-              </svg>
-            ) : (
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                stroke="white"
-                strokeWidth="2"
-                fill="none"
-              >
-                <path d="M6 6L18 18" />
-                <path d="M18 6L6 18" />
-              </svg>
-            )}
-          </button>
+            <div className="rounded-3xl border border-white/10 bg-[#111111]/95 p-7 backdrop-blur-xl">
+
+              <div className="flex flex-col gap-6">
+
+                {menus.map((item) => (
+                  <Link
+                    key={item}
+                    href="#"
+                    onClick={() => setOpen(false)}
+                    className="border-b border-white/10 pb-5 text-2xl text-white"
+                  >
+                    {item}
+                  </Link>
+                ))}
+
+                <button className="mt-3 rounded-2xl bg-white py-4 text-lg font-semibold text-black">
+                  Get Started
+                </button>
+
+              </div>
+            </div>
+          </div>
+
         </div>
       </header>
-
-      {/* Mobile Menu */}
-      <div
-        className={`fixed left-0 right-0 top-24 z-40 px-4 transition-all duration-300 ${
-          open
-            ? "opacity-100 translate-y-0"
-            : "pointer-events-none -translate-y-4 opacity-0"
-        } md:hidden`}
-      >
-        <div className="rounded-3xl border border-white/10 bg-[#111111]/95 backdrop-blur-2xl shadow-2xl p-6">
-
-          <nav className="flex flex-col">
-
-            <Link className="border-b border-white/10 py-5 text-xl" href="/">
-              Home
-            </Link>
-
-            <Link className="border-b border-white/10 py-5 text-xl" href="#">
-              Features
-            </Link>
-
-            <Link className="border-b border-white/10 py-5 text-xl" href="#">
-              Documentation
-            </Link>
-
-            <Link className="border-b border-white/10 py-5 text-xl" href="#">
-              Pricing
-            </Link>
-
-            <Link className="border-b border-white/10 py-5 text-xl" href="#">
-              Contact
-            </Link>
-
-            <button className="mt-6 rounded-2xl bg-white py-4 text-lg font-semibold text-black transition hover:scale-[1.02]">
-              Get Started
-            </button>
-
-          </nav>
-        </div>
-      </div>
     </>
   );
-          }
+}
